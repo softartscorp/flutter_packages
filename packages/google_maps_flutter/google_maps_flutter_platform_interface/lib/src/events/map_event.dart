@@ -167,3 +167,11 @@ class MapLongPressEvent extends _PositionedMapEvent<void> {
   /// The `position` of this event is the LatLng where the Map was long pressed.
   MapLongPressEvent(int mapId, LatLng position) : super(mapId, position, null);
 }
+
+/// An event fired when a [PointOfInterest] is tapped.
+class MapPointOfInterestTapEvent extends MapEvent<PointOfInterest> {
+  /// Build an MapPoiClick Event triggered from the map represented by `mapId`.
+  ///
+  /// The `poi` of this event is the Point of Interest where the Map was pressed.
+  MapPointOfInterestTapEvent(super.mapId, super.poi);
+}

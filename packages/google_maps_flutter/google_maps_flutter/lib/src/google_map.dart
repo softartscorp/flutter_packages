@@ -125,6 +125,7 @@ class GoogleMap extends StatefulWidget {
     this.onCameraIdle,
     this.onTap,
     this.onLongPress,
+    this.onPointOfInterestTap,
   });
 
   /// Callback method for when the map is ready to be used.
@@ -228,6 +229,9 @@ class GoogleMap extends StatefulWidget {
 
   /// Called every time a [GoogleMap] is long pressed.
   final ArgumentCallback<LatLng>? onLongPress;
+
+  /// Called every time a [PointOfInterest] is clicked.
+  final ArgumentCallback<PointOfInterest>? onPointOfInterestTap;
 
   /// True if a "My Location" layer should be shown on the map.
   ///
@@ -520,6 +524,13 @@ class _GoogleMapState extends State<GoogleMap> {
     final ArgumentCallback<LatLng>? onLongPress = widget.onLongPress;
     if (onLongPress != null) {
       onLongPress(position);
+    }
+  }
+
+  void onPointOfInterestTap(PointOfInterest poi) {
+    final ArgumentCallback<PointOfInterest>? onPointOfInterestTap = widget.onPointOfInterestTap;
+    if (onPointOfInterestTap != null) {
+      onPointOfInterestTap(poi);
     }
   }
 }

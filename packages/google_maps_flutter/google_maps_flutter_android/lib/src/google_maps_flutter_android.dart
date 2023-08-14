@@ -177,6 +177,11 @@ class GoogleMapsFlutterAndroid extends GoogleMapsFlutterPlatform {
   }
 
   @override
+  Stream<MapPointOfInterestTapEvent> onPointOfInterestTap({required int mapId}) {
+    return _events(mapId).whereType<MapPointOfInterestTapEvent>();
+  }
+
+  @override
   Stream<MapLongPressEvent> onLongPress({required int mapId}) {
     return _events(mapId).whereType<MapLongPressEvent>();
   }
@@ -267,6 +272,16 @@ class GoogleMapsFlutterAndroid extends GoogleMapsFlutterPlatform {
         _mapEventStreamController.add(MapLongPressEvent(
           mapId,
           LatLng.fromJson(arguments['position'])!,
+        ));
+        break;
+      case 'map#onPointOfInterestTap':
+        final Map<String, Object?> arguments = _getArgumentDictionary(call);
+        _mapEventStreamController.add(MapPointOfInterestTapEvent(
+          mapId,
+          PointOfInterest(
+            LatLng.fromJson(arguments['position'])!,
+            arguments['placeId']! as String,
+          ),
         ));
         break;
       case 'tileOverlay#getTile':
